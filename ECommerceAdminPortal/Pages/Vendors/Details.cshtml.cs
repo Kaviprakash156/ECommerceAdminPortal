@@ -3,24 +3,24 @@ using ECommerceAdminPortal.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ECommerceAdminPortal.Pages.Products;
+namespace ECommerceAdminPortal.Pages.Vendors;
 
 public class DetailsModel : PageModel
 {
-    private readonly ProductService _productService;
+    private readonly VendorService _vendorService;
 
-    public DetailsModel(ProductService productService)
+    public DetailsModel(VendorService vendorService)
     {
-        _productService = productService;
+        _vendorService = vendorService;
     }
 
-    public Product Product { get; set; } = null!;
+    public Vendor Vendor { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
-        Product = await _productService.GetByIdAsync(id);
+        Vendor = await _vendorService.GetByIdAsync(id);
 
-        if (Product == null)
+        if (Vendor == null)
             return NotFound();
 
         return Page();

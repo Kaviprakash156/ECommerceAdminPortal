@@ -1,17 +1,19 @@
 ﻿@page "{id:int}"
-@model ECommerceAdminPortal.Pages.Products.DeleteModel
+@model ECommerceAdminPortal.Pages.Vendors.DeleteModel
 
-<h2>Delete Product</h2>
+<h2>Delete Vendor</h2>
 
 <form method="post">
 
     <input type="hidden"
-           asp-for="Product.ProductId" />
+           asp-for="Vendor.VendorId" />
 
     <h4>
         Are you sure you want to delete
-        @Model.Product.ProductName ?
+        @Model.Vendor.VendorName ?
     </h4>
+
+    <br />
 
     <button class="btn btn-danger">
         Delete

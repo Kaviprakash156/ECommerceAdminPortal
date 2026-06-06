@@ -3,25 +3,25 @@ using ECommerceAdminPortal.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ECommerceAdminPortal.Pages.Products;
+namespace ECommerceAdminPortal.Pages.Vendors;
 
 public class DeleteModel : PageModel
 {
-    private readonly ProductService _productService;
+    private readonly VendorService _vendorService;
 
-    public DeleteModel(ProductService productService)
+    public DeleteModel(VendorService vendorService)
     {
-        _productService = productService;
+        _vendorService = vendorService;
     }
 
     [BindProperty]
-    public Product Product { get; set; } = null!;
+    public Vendor Vendor { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
-        Product = await _productService.FindAsync(id);
+        Vendor = await _vendorService.GetByIdAsync(id);
 
-        if (Product == null)
+        if (Vendor == null)
             return NotFound();
 
         return Page();
@@ -29,16 +29,16 @@ public class DeleteModel : PageModel
 
     public async Task<IActionResult> OnPostAsync()
     {
-        var product =
-            await _productService.FindAsync(Product.ProductId);
+        var vendor =
+            await _vendorService.GetByIdAsync(Vendor.VendorId);
 
-        if (product == null)
+        if (vendor == null)
             return NotFound();
 
-        await _productService.DeleteAsync(product);
+        await _vendorService.DeleteAsync(vendor);
 
         TempData["Success"] =
-            "Product deleted successfully";
+            "Vendor deleted successfully";
 
         return RedirectToPage("Index");
     }

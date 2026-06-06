@@ -40,7 +40,16 @@ public class VendorService
 
     public async Task DeleteAsync(Vendor vendor)
     {
+        bool hasProducts =
+            await _context.Products
+                .AnyAsync(x => x.VendorId == vendor.VendorId);
+
+        if (hasProducts)
+            throw new Exception(
+                "Cannot delete vendor with products.");
+
         _context.Vendors.Remove(vendor);
+
         await _context.SaveChangesAsync();
     }
 

@@ -1,49 +1,39 @@
-using ECommerceAdminPortal.Data;
 using ECommerceAdminPortal.Models;
 using ECommerceAdminPortal.Services;
 using ECommerceAdminPortal.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ECommerceAdminPortal.Pages.Products;
+namespace ECommerceAdminPortal.Pages.Vendors;
 
 public class EditModel : PageModel
 {
-    private readonly ProductService _productService;
-    private readonly ApplicationDbContext _context;
+    private readonly VendorService _vendorService;
 
-    public EditModel(
-        ProductService productService,
-        ApplicationDbContext context)
+    public EditModel(VendorService vendorService)
     {
-        _productService = productService;
-        _context = context;
+        _vendorService = vendorService;
     }
 
     [BindProperty]
-    public ProductViewModel Product { get; set; } = new();
-
-    public SelectList Vendors { get; set; } = default!;
+    public VendorViewModel Vendor { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
-        var product = await _productService.FindAsync(id);
+        var vendor =
+            await _vendorService.GetByIdAsync(id);
 
-        if (product == null)
+        if (vendor == null)
             return NotFound();
 
-        Product = new ProductViewModel
+        Vendor = new VendorViewModel
         {
-            ProductId = product.ProductId,
-            ProductName = product.ProductName,
-            Description = product.Description,
-            Price = product.Price,
-            VendorId = product.VendorId,
-            IsActive = product.IsActive
+            VendorId = vendor.VendorId,
+            VendorName = vendor.VendorName,
+            Email = vendor.Email,
+            Phone = vendor.Phone,
+            IsActive = vendor.IsActive
         };
-
-        LoadVendors();
 
         return Page();
     }
@@ -51,36 +41,24 @@ public class EditModel : PageModel
     public async Task<IActionResult> OnPostAsync()
     {
         if (!ModelState.IsValid)
-        {
-            LoadVendors();
             return Page();
-        }
 
-        var product =
-            await _productService.FindAsync(Product.ProductId);
+        var vendor =
+            await _vendorService.GetByIdAsync(Vendor.VendorId);
 
-        if (product == null)
+        if (vendor == null)
             return NotFound();
 
-        product.ProductName = Product.ProductName;
-        product.Description = Product.Description;
-        product.Price = Product.Price;
-        product.VendorId = Product.VendorId;
-        product.IsActive = Product.IsActive;
+        vendor.VendorName = Vendor.VendorName;
+        vendor.Email = Vendor.Email;
+        vendor.Phone = Vendor.Phone;
+        vendor.IsActive = Vendor.IsActive;
 
-        await _productService.UpdateAsync(product);
+        await _vendorService.UpdateAsync(vendor);
 
         TempData["Success"] =
-            "Product updated successfully";
+            "Vendor updated successfully";
 
         return RedirectToPage("Index");
-    }
-
-    private void LoadVendors()
-    {
-        Vendors = new SelectList(
-            _context.Vendors.ToList(),
-            "VendorId",
-            "VendorName");
     }
 }
