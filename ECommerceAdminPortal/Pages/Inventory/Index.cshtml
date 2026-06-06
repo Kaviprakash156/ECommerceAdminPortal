@@ -1,0 +1,76 @@
+﻿@page
+@model ECommerceAdminPortal.Pages.Inventory.IndexModel
+
+<h2>Inventory</h2>
+
+<div class="mb-3">
+
+    <a asp-page="Index"
+       asp-route-status="lowstock"
+       class="btn btn-warning">
+
+        Low Stock
+
+    </a>
+
+    <a asp-page="Index"
+       class="btn btn-secondary">
+
+        All Stock
+
+    </a>
+
+</div>
+
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+
+            <th>Product</th>
+
+            <th>Quantity</th>
+
+            <th>Reorder Level</th>
+
+            <th>Action</th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model.Inventories)
+        {
+            <tr>
+
+                <td>
+                    @item.Product?.ProductName
+                </td>
+
+                <td>
+                    @item.Quantity
+                </td>
+
+                <td>
+                    @item.ReorderLevel
+                </td>
+
+                <td>
+
+                    <a asp-page="Edit"
+                       asp-route-id="@item.InventoryId"
+                       class="btn btn-primary">
+
+                        Adjust Stock
+
+                    </a>
+
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>

@@ -20,6 +20,11 @@ public class ApplicationDbContext : DbContext
     public DbSet<Order> Orders => Set<Order>();
 
     public DbSet<OrderDetail> OrderDetails => Set<OrderDetail>();
+    public DbSet<InventorySummary> InventorySummaries
+    => Set<InventorySummary>();
+
+    public DbSet<InventoryAudit> InventoryAudits
+    => Set<InventoryAudit>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -30,6 +35,8 @@ public class ApplicationDbContext : DbContext
         ConfigureInventory(modelBuilder);
         ConfigureOrder(modelBuilder);
         ConfigureOrderDetail(modelBuilder);
+        modelBuilder.Entity<InventorySummary>()
+    .HasNoKey();
     }
 
     private static void ConfigureVendor(ModelBuilder modelBuilder)

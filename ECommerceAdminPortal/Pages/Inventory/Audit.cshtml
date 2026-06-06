@@ -1,0 +1,37 @@
+﻿@page
+@model ECommerceAdminPortal.Pages.Inventory.AuditModel
+
+<h2>Inventory Audit</h2>
+
+<table class="table table-bordered">
+
+    <thead>
+
+        <tr>
+
+            <th>Product Id</th>
+            <th>Old Qty</th>
+            <th>New Qty</th>
+            <th>Modified Date</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model.Audits)
+        {
+            <tr>
+
+                <td>@item.ProductId</td>
+                <td>@item.OldQuantity</td>
+                <td>@item.NewQuantity</td>
+                <td>@item.ModifiedDate</td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>

@@ -1,0 +1,71 @@
+﻿@if (ViewData["Notification"] != null)
+{
+    <div class="alert alert-info">
+
+        @ViewData["Notification"]
+
+    </div>
+}
+
+@page
+@model ECommerceAdminPortal.Pages.Inventory.DashboardModel
+
+<h2>Inventory Dashboard</h2>
+
+<div class="row">
+
+    <div class="col-md-4">
+
+        <div class="card">
+
+            <div class="card-body">
+
+                <h3>
+                    @Model.Summary.TotalProducts
+                </h3>
+
+                <p>Total Products</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card">
+
+            <div class="card-body">
+
+                <h3>
+                    @Model.Summary.OutOfStock
+                </h3>
+
+                <p>Out Of Stock</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card">
+
+            <div class="card-body">
+
+                <h3>
+                    @Model.Summary.LowStock
+                </h3>
+
+                <p>Low Stock</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
