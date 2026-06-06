@@ -1,0 +1,40 @@
+﻿@page
+
+@model ECommerceAdminPortal.Pages.Orders.ReportModel
+
+<h2>Order Report</h2>
+
+<table class="table table-bordered">
+
+    <thead>
+
+        <tr>
+
+            <th>Order Id</th>
+            <th>Customer</th>
+            <th>Date</th>
+            <th>Total</th>
+            <th>Status</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model.Orders)
+        {
+            <tr>
+
+                <td>@item.OrderId</td>
+                <td>@item.CustomerName</td>
+                <td>@item.OrderDate</td>
+                <td>@item.TotalAmount</td>
+                <td>@item.Status</td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>

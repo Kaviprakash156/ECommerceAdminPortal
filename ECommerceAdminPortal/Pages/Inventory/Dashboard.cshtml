@@ -1,4 +1,7 @@
-﻿@if (ViewData["Notification"] != null)
+﻿@page
+@model ECommerceAdminPortal.Pages.Inventory.DashboardModel
+
+@if (ViewData["Notification"] != null)
 {
     <div class="alert alert-info">
 
@@ -6,9 +9,6 @@
 
     </div>
 }
-
-@page
-@model ECommerceAdminPortal.Pages.Inventory.DashboardModel
 
 <h2>Inventory Dashboard</h2>
 

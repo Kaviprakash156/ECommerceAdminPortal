@@ -1,0 +1,34 @@
+﻿@page
+
+@model ECommerceAdminPortal.Pages.Orders.StatusModel
+
+<h2>Update Status</h2>
+
+<form method="post">
+
+    <input asp-for="OrderId" type="hidden" />
+
+    <div class="mb-3">
+
+        <label>Status</label>
+
+        <select asp-for="Status"
+                class="form-select">
+
+            <option>Pending</option>
+            <option>Processing</option>
+            <option>Shipped</option>
+            <option>Delivered</option>
+            <option>Cancelled</option>
+
+        </select>
+
+    </div>
+
+    <button class="btn btn-success">
+
+        Update
+
+    </button>
+
+</form>

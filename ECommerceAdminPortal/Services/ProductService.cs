@@ -85,4 +85,11 @@ public class ProductService
             .Take(pageSize)
             .ToListAsync();
     }
+    public async Task<List<Product>> GetActiveProductsAsync()
+    {
+        return await _context.Products
+            .Where(x => x.IsActive)
+            .OrderBy(x => x.ProductName)
+            .ToListAsync();
+    }
 }

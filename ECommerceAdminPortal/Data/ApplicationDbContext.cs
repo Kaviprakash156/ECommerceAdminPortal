@@ -26,6 +26,9 @@ public class ApplicationDbContext : DbContext
     public DbSet<InventoryAudit> InventoryAudits
     => Set<InventoryAudit>();
 
+    public DbSet<OrderReport> OrderReports
+    => Set<OrderReport>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -36,6 +39,14 @@ public class ApplicationDbContext : DbContext
         ConfigureOrder(modelBuilder);
         ConfigureOrderDetail(modelBuilder);
         modelBuilder.Entity<InventorySummary>()
+    .HasNoKey();
+        modelBuilder.Entity<InventoryAudit>(entity =>
+        {
+            entity.HasKey(x => x.AuditId);
+
+            entity.ToTable("InventoryAudit");
+        });
+        modelBuilder.Entity<OrderReport>()
     .HasNoKey();
     }
 

@@ -1,0 +1,69 @@
+﻿@page "{id:int}"
+@model ECommerceAdminPortal.Pages.Orders.DetailsModel
+
+<h2>Order Details</h2>
+
+<div class="card">
+
+    <div class="card-body">
+
+        <h5>Customer Information</h5>
+
+        <p>
+            <strong>Customer:</strong>
+            @Model.Order.CustomerName
+        </p>
+
+        <p>
+            <strong>Date:</strong>
+            @Model.Order.OrderDate
+        </p>
+
+        <p>
+            <strong>Status:</strong>
+            @Model.Order.Status
+        </p>
+
+        <p>
+            <strong>Total:</strong>
+            @Model.Order.TotalAmount
+        </p>
+
+    </div>
+
+</div>
+
+<br />
+
+<table class="table table-bordered">
+
+    <thead>
+
+        <tr>
+
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Price</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model.Order.OrderDetails)
+        {
+            <tr>
+
+                <td>@item.Product?.ProductName</td>
+
+                <td>@item.Quantity</td>
+
+                <td>@item.Price</td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>

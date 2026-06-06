@@ -1,0 +1,57 @@
+﻿@page
+@model ECommerceAdminPortal.Pages.Orders.CreateModel
+
+<h2>Create Order</h2>
+
+<form method="post">
+
+    <div asp-validation-summary="All"
+         class="text-danger">
+    </div>
+
+    <div class="mb-3">
+
+        <label>Customer Name</label>
+
+        <input asp-for="Order.CustomerName"
+               class="form-control" />
+
+    </div>
+
+    <div class="mb-3">
+
+        <label>Product</label>
+
+        <select asp-for="Order.ProductId"
+                asp-items="Model.Products"
+                class="form-select">
+
+            <option value="">
+                Select Product
+            </option>
+
+        </select>
+
+    </div>
+
+    <div class="mb-3">
+
+        <label>Quantity</label>
+
+        <input asp-for="Order.Quantity"
+               class="form-control" />
+
+    </div>
+
+    <button class="btn btn-success">
+
+        Create Order
+
+    </button>
+
+</form>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

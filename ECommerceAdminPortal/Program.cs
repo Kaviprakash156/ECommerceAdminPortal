@@ -1,11 +1,31 @@
 using ECommerceAdminPortal.Data;
+using ECommerceAdminPortal.Filters;
+using ECommerceAdminPortal.Middleware;
 using ECommerceAdminPortal.Services;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
+
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .WriteTo.File(
+        "Logs/log-.txt",
+        rollingInterval: RollingInterval.Day)
+    .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Host.UseSerilog();
+
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options =>
+{
+})
+.AddMvcOptions(options =>
+{
+    options.Filters.Add<
+        ActivityLoggingPageFilter>();
+});
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
@@ -27,6 +47,11 @@ builder.Services.AddSession(options =>
         TimeSpan.FromMinutes(30);
 });
 
+builder.Services.AddScoped<OrderService>();
+
+builder.Services.AddScoped<
+    ActivityLoggingPageFilter>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -38,13 +63,18 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
+
+app.UseSession();
 
 app.UseRouting();
 
-app.UseAuthorization();
+app.UseGlobalException();
 
-app.UseSession();
+app.UseRequestLogging();
+
+app.UseAuthorization();
 
 app.MapRazorPages();
 
