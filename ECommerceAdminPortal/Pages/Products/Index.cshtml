@@ -17,6 +17,32 @@
     </div>
 }
 
+<form method="get">
+
+    <div class="row mb-3">
+
+        <div class="col-md-4">
+
+            <input type="text"
+                   name="SearchTerm"
+                   value="@Model.SearchTerm"
+                   class="form-control"
+                   placeholder="Search Product" />
+
+        </div>
+
+        <div class="col-md-2">
+
+            <button class="btn btn-primary">
+                Search
+            </button>
+
+        </div>
+
+    </div>
+
+</form>
+
 <table class="table table-bordered">
     <thead>
         <tr>

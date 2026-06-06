@@ -1,6 +1,7 @@
 ﻿using ECommerceAdminPortal.Data;
 using ECommerceAdminPortal.Models;
 using Microsoft.EntityFrameworkCore;
+using X.PagedList;
 
 namespace ECommerceAdminPortal.Services;
 
@@ -43,5 +44,45 @@ public class ProductService
     {
         _context.Products.Remove(product);
         await _context.SaveChangesAsync();
+    }
+    public async Task<Product?> FindAsync(int id)
+    {
+        return await _context.Products
+            .FirstOrDefaultAsync(x => x.ProductId == id);
+    }
+    public async Task<List<Product>> SearchAsync(string? searchTerm)
+    {
+        var query = _context.Products
+            .Include(x => x.Vendor)
+            .AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(searchTerm))
+        {
+            query = query.Where(x =>
+                x.ProductName.Contains(searchTerm));
+        }
+
+        return await query.ToListAsync();
+    }
+    public async Task<List<Product>> GetPagedProductsAsync(
+    string? searchTerm,
+    int pageNumber,
+    int pageSize)
+    {
+        var query = _context.Products
+            .Include(x => x.Vendor)
+            .AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(searchTerm))
+        {
+            query = query.Where(x =>
+                x.ProductName.Contains(searchTerm));
+        }
+
+        return await query
+            .OrderBy(x => x.ProductName)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
     }
 }

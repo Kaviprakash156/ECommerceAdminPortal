@@ -1,5 +1,6 @@
 using ECommerceAdminPortal.Models;
 using ECommerceAdminPortal.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ECommerceAdminPortal.Pages.Products;
@@ -16,10 +17,12 @@ public class IndexModel : PageModel
     public IList<Product> Products { get; set; }
         = new List<Product>();
 
+    [BindProperty(SupportsGet = true)]
+    public string? SearchTerm { get; set; }
+
     public async Task OnGetAsync()
     {
-        ViewData["Title"] = "Product List";
-
-        Products = await _productService.GetAllAsync();
+        Products =
+            await _productService.SearchAsync(SearchTerm);
     }
 }
