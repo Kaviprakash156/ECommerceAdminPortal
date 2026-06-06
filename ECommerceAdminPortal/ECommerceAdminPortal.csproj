@@ -13,8 +13,6 @@
     <Folder Include="Helpers\" />
     <Folder Include="Constants\" />
     <Folder Include="SQLScripts\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="Services\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
 

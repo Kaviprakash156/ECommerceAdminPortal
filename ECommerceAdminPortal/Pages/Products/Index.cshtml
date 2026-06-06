@@ -1,0 +1,62 @@
+﻿@page
+@model ECommerceAdminPortal.Pages.Products.IndexModel
+
+<h2>Products</h2>
+
+<p>
+    <a asp-page="Create"
+       class="btn btn-primary">
+        Add Product
+    </a>
+</p>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Vendor</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th width="250">Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>@item.ProductName</td>
+                <td>@item.Vendor?.VendorName</td>
+                <td>@item.Price</td>
+                <td>@item.IsActive</td>
+
+                <td>
+                    <a asp-page="Details"
+                       asp-route-id="@item.ProductId"
+                       class="btn btn-info">
+                        Details
+                    </a>
+
+                    <a asp-page="Edit"
+                       asp-route-id="@item.ProductId"
+                       class="btn btn-warning">
+                        Edit
+                    </a>
+
+                    <a asp-page="Delete"
+                       asp-route-id="@item.ProductId"
+                       class="btn btn-danger">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

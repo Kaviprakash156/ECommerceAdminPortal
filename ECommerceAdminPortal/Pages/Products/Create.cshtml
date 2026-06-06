@@ -1,0 +1,58 @@
+﻿@page
+@model ECommerceAdminPortal.Pages.Products.CreateModel
+
+<h2>Create Product</h2>
+
+<form method="post">
+
+    <div class="mb-3">
+        <label>Name</label>
+        <input asp-for="Product.ProductName"
+               class="form-control" />
+        <span asp-validation-for="Product.ProductName"
+              class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label>Description</label>
+        <textarea asp-for="Product.Description"
+                  class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label>Price</label>
+        <input asp-for="Product.Price"
+               class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Vendor</label>
+
+        <select asp-for="Product.VendorId"
+                asp-items="Model.Vendors"
+                class="form-select">
+            <option value="">
+                Select Vendor
+            </option>
+        </select>
+    </div>
+
+    <div class="form-check mb-3">
+        <input asp-for="Product.IsActive"
+               class="form-check-input" />
+
+        <label asp-for="Product.IsActive"
+               class="form-check-label">
+            Active
+        </label>
+    </div>
+
+    <button class="btn btn-success">
+        Save
+    </button>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
