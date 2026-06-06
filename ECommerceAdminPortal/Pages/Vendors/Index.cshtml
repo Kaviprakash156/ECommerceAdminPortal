@@ -1,0 +1,94 @@
+﻿@page
+@model ECommerceAdminPortal.Pages.Vendors.IndexModel
+
+<h2>Vendors</h2>
+
+<p>
+    <a asp-page="Create"
+       class="btn btn-primary">
+        Add Vendor
+    </a>
+</p>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+<form method="get">
+
+    <div class="row mb-3">
+
+        <div class="col-md-4">
+            <input type="text"
+                   name="SearchTerm"
+                   value="@Model.SearchTerm"
+                   class="form-control"
+                   placeholder="Search Vendor" />
+        </div>
+
+        <div class="col-md-2">
+            <button class="btn btn-primary">
+                Search
+            </button>
+        </div>
+
+    </div>
+
+</form>
+
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Status</th>
+            <th width="250">Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var vendor in Model.Vendors)
+        {
+            <tr>
+
+                <td>@vendor.VendorName</td>
+                <td>@vendor.Email</td>
+                <td>@vendor.Phone</td>
+                <td>
+                    @(vendor.IsActive ? "Active" : "Inactive")
+                </td>
+
+                <td>
+
+                    <a asp-page="Details"
+                       asp-route-id="@vendor.VendorId"
+                       class="btn btn-info">
+                        Details
+                    </a>
+
+                    <a asp-page="Edit"
+                       asp-route-id="@vendor.VendorId"
+                       class="btn btn-warning">
+                        Edit
+                    </a>
+
+                    <a asp-page="Delete"
+                       asp-route-id="@vendor.VendorId"
+                       class="btn btn-danger">
+                        Delete
+                    </a>
+
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>

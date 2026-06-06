@@ -1,0 +1,25 @@
+﻿@page "{id:int}"
+@model ECommerceAdminPortal.Pages.Products.DeleteModel
+
+<h2>Delete Product</h2>
+
+<form method="post">
+
+    <input type="hidden"
+           asp-for="Product.ProductId" />
+
+    <h4>
+        Are you sure you want to delete
+        @Model.Product.ProductName ?
+    </h4>
+
+    <button class="btn btn-danger">
+        Delete
+    </button>
+
+    <a asp-page="Index"
+       class="btn btn-secondary">
+        Cancel
+    </a>
+
+</form>

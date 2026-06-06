@@ -15,6 +15,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddScoped<ProductService>();
 
+builder.Services.AddScoped<VendorService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

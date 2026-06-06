@@ -1,0 +1,24 @@
+﻿@page "{id:int}"
+@model ECommerceAdminPortal.Pages.Products.DetailsModel
+
+<h2>Product Details</h2>
+
+<div class="card">
+    <div class="card-body">
+
+        <p><strong>Name:</strong> @Model.Product.ProductName</p>
+
+        <p><strong>Description:</strong> @Model.Product.Description</p>
+
+        <p><strong>Price:</strong> @Model.Product.Price</p>
+
+        <p><strong>Vendor:</strong> @Model.Product.Vendor?.VendorName</p>
+
+        <p><strong>Status:</strong> @Model.Product.IsActive</p>
+
+    </div>
+</div>
+
+<a asp-page="Index" class="btn btn-secondary mt-3">
+    Back
+</a>

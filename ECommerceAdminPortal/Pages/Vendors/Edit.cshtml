@@ -1,0 +1,43 @@
+﻿@page "{id:int}"
+@model ECommerceAdminPortal.Pages.Products.EditModel
+
+<h2>Edit Product</h2>
+
+<form method="post">
+
+    <input type="hidden"
+           asp-for="Product.ProductId" />
+
+    <div class="mb-3">
+        <label>Name</label>
+        <input asp-for="Product.ProductName"
+               class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Description</label>
+        <textarea asp-for="Product.Description"
+                  class="form-control">
+        </textarea>
+    </div>
+
+    <div class="mb-3">
+        <label>Price</label>
+        <input asp-for="Product.Price"
+               class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Vendor</label>
+
+        <select asp-for="Product.VendorId"
+                asp-items="Model.Vendors"
+                class="form-select">
+        </select>
+    </div>
+
+    <button class="btn btn-primary">
+        Update
+    </button>
+
+</form>

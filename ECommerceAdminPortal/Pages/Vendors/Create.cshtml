@@ -1,0 +1,49 @@
+﻿@page
+@model ECommerceAdminPortal.Pages.Vendors.CreateModel
+
+<h2>Create Vendor</h2>
+
+<form method="post">
+
+    <div class="mb-3">
+        <label>Name</label>
+        <input asp-for="Vendor.VendorName"
+               class="form-control" />
+        <span asp-validation-for="Vendor.VendorName"
+              class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label>Email</label>
+        <input asp-for="Vendor.Email"
+               class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Phone</label>
+        <input asp-for="Vendor.Phone"
+               class="form-control" />
+    </div>
+
+    <div class="form-check mb-3">
+
+        <input asp-for="Vendor.IsActive"
+               class="form-check-input" />
+
+        <label asp-for="Vendor.IsActive"
+               class="form-check-label">
+            Active
+        </label>
+
+    </div>
+
+    <button class="btn btn-success">
+        Save
+    </button>
+
+</form>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
